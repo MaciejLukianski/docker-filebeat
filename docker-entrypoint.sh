@@ -41,14 +41,14 @@ print(container['Name'])
       curl --no-buffer -s -XGET --unix-socket /tmp/docker.sock http:/containers/$1/json | python -c "
 import json, sys
 container=json.loads(sys.stdin.readline())
-print(container['Config']['Tty'].lower())
+print(container['Config']['Tty'])
 "
   }
 
   getSkipBytes() {
       local CONTAINER=$1
-      CONFIG_TTY=`getTtyValue $CONTAINER`
-      if [ "$CONFIG_TTY" = "false" ]; then
+      if (getTtyValue $CONTAINER | grep -i false >/dev/null)
+      then
           echo 9-
       else
           echo 1-

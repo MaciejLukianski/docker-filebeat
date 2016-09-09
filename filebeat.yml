@@ -82,7 +82,7 @@ filebeat:
       # for Java Stack Traces or C-Line Continuation
       multiline:
         pattern: '^\[[^\]]+\] [[:space:]]+|^\[[^\]]+\] Caused by'
-        negate: true
+        negate: false
         match: after
         max_lines: 1000
 

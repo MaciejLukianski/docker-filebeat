@@ -81,7 +81,7 @@ filebeat:
       # Mutiline can be used for log messages spanning multiple lines. This is common
       # for Java Stack Traces or C-Line Continuation
       multiline:
-        pattern: '^[[:space:]]+|^Caused by:'
+        pattern: '^\[[^\]]+\] [[:space:]]+|^\[[^\]]+\] Caused by'
         negate: false
         match: after
         max_lines: 1000

@@ -5,7 +5,6 @@ if [ "$1" = 'start' ]; then
 
   CONTAINERS_FOLDER=/tmp/containers
   NAMED_PIPE=/tmp/pipe
-
   setConfiguration() {
     KEY=$1
     VALUE=$2
@@ -93,7 +92,7 @@ print(container['Config']['Tty'])
   mkfifo -m a=rw "$NAMED_PIPE"
 
   echo "Initializing Filebeat..."
-  cat $NAMED_PIPE | ${FILEBEAT_HOME}/filebeat -e -v &
+  cat $NAMED_PIPE | ${FILEBEAT_HOME}/filebeat -c ${FILEBEAT_HOME}/filebeat.yml -e -v &
 
   while true; do
       CONTAINERS=`getRunningContainers`

@@ -1,9 +1,16 @@
-filebeat:
-  image: bargenson/filebeat:latest
-  restart: unless-stopped
-  volumes:
-   - /var/run/docker.sock:/tmp/docker.sock
-  environment:
-   - LOGSTASH_HOST=logstash.localdomain
-   - LOGSTASH_PORT=5044
-   - SHIPPER_NAME=aWonderfulName
+version: '2'
+
+services:  
+  filebeat:
+    build: ./
+    volumes:
+     - /var/run/docker.sock:/tmp/docker.sock
+    environment:
+     - LOGSTASH_HOST=172.18.0.4
+     - LOGSTASH_PORT=5000
+     - SHIPPER_NAME=someMaciejShipperName
+    networks:
+      - dockerelk_docker_elk
+networks:
+  dockerelk_docker_elk:
+    external: true

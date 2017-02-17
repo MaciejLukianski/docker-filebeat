@@ -5,8 +5,8 @@ FROM    ubuntu
 
 
 # Build variables
-ENV     FILEBEAT_VERSION 1.2.3
-ENV     FILEBEAT_URL https://download.elastic.co/beats/filebeat/filebeat-${FILEBEAT_VERSION}-x86_64.tar.gz
+ENV     FILEBEAT_VERSION 5.2.1-linux
+ENV     FILEBEAT_URL https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${FILEBEAT_VERSION}-x86_64.tar.gz
 
 # Environment variables
 ENV     FILEBEAT_HOME /opt/filebeat-${FILEBEAT_VERSION}-x86_64
@@ -18,7 +18,7 @@ RUN     apt-get update && apt-get -y install python curl
 
 RUN     curl -sL ${FILEBEAT_URL} | tar xz -C .
 ADD     filebeat.yml ${FILEBEAT_HOME}/
-ADD     docker-entrypoint.sh    /entrypoint.sh
+ADD     docker-entrypoint.sh /entrypoint.sh
 RUN     chmod +x /entrypoint.sh
 
 ENTRYPOINT  ["/entrypoint.sh"]
